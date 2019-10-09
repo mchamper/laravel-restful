@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Packages\v1\RESTful\Resolvers\Filters;
+namespace Mchamper\LaravelRestful\Resolvers\Filters;
 
-use App\Packages\v1\RESTful\Resolvers\Filters\RESTfulFiltersResolver;
+use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersResolver;
 
 class RESTfulFiltersDefaultResolver extends RESTfulFiltersResolver
 {

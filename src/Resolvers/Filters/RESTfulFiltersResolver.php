@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Packages\v1\RESTful\Resolvers\Filters;
+namespace Mchamper\LaravelRestful\Resolvers\Filters;
 
-use App\Packages\v1\RESTful\Resolvers\IRESTfulResolver;
-use App\Packages\v1\RESTful\Resolvers\Filters\RESTfulFiltersDefaultResolver;
-use App\Packages\v1\RESTful\Resolvers\Filters\RESTfulFiltersAdvanceResolver;
-use App\Packages\v1\RESTful\Mappers\RESTfulOperationsMapper;
+use Mchamper\LaravelRestful\Resolvers\IRESTfulResolver;
+use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersDefaultResolver;
+use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersAdvanceResolver;
+use Mchamper\LaravelRestful\Mappers\RESTfulOperationsMapper;
 
 abstract class RESTfulFiltersResolver implements IRESTfulResolver
 {

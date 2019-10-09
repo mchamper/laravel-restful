@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Packages\v1\RESTful\Resolvers;
+namespace Mchamper\LaravelRestful\Resolvers;
 
 interface IRESTfulResolver
 {
