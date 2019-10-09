@@ -1,4 +1,4 @@
-# Laravel Responses
+# Laravel RESTful
 
 ## Instalación
 
