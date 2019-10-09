@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Packages\v1\RESTful;
+namespace Mchamper\LaravelRestful;
 
 use Illuminate\Database\QueryException;
-use App\Packages\v1\RESTful\Resolvers\RESTfulFieldsResolver;
-use App\Packages\v1\RESTful\Resolvers\RESTfulWithResolver;
-use App\Packages\v1\RESTful\Resolvers\Filters\RESTfulFiltersDefaultResolver;
-use App\Packages\v1\RESTful\Resolvers\Filters\RESTfulFiltersAdvanceResolver;
-use App\Packages\v1\RESTful\Resolvers\RESTfulSearchResolver;
-use App\Packages\v1\RESTful\Resolvers\RESTfulSortResolver;
-use App\Packages\v1\RESTful\Resolvers\RESTfulAppendsResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulFieldsResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulWithResolver;
+use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersDefaultResolver;
+use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersAdvanceResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulSearchResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulSortResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulAppendsResolver;
 
 class RESTful
 {

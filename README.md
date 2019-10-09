@@ -14,7 +14,7 @@ Agregar al archivo composer.json del proyecto Laravel principal este repositorio
 ```
 
 ```
-composer require mchamper/laravel-responses
+composer require mchamper/laravel-restful
 ```
 
 ## Utilización

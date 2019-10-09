@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Packages\v1\RESTful\Resolvers;
+namespace Mchamper\LaravelRestful\Resolvers;
 
-use App\Packages\v1\RESTful\Resolvers\IRESTfulResolver;
+use Mchamper\LaravelRestful\Resolvers\IRESTfulResolver;
 
 class RESTfulSortResolver implements IRESTfulResolver
 {

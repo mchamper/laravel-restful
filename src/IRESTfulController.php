@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Packages\v1\RESTful;
+namespace Mchamper\LaravelRestful;
 
 interface IRESTfulController
 {

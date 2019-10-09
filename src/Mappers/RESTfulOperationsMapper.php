@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Packages\v1\RESTful\Mappers;
+namespace Mchamper\LaravelRestful\Mappers;
 
 class RESTfulOperationsMapper
 {

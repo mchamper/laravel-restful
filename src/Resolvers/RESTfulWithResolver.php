@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Packages\v1\RESTful\Resolvers;
+namespace Mchamper\LaravelRestful\Resolvers;
 
-use App\Packages\v1\RESTful\Resolvers\IRESTfulResolver;
-use App\Packages\v1\RESTful\RESTful;
+use Mchamper\LaravelRestful\Resolvers\IRESTfulResolver;
+use Mchamper\LaravelRestful\RESTful;
 
 class RESTfulWithResolver implements IRESTfulResolver
 {
