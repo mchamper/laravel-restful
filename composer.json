@@ -1,0 +1,15 @@
+{
+    "name": "mchamper/laravel-restful",
+    "description": "",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Mchamper\\LaravelRestful\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mchamper\\LaravelRestful\\Tests\\": "tests/"
+        }
+    }
+}
