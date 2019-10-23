@@ -116,7 +116,7 @@ class RESTful
 
     public function find($primaryKeys) {
         try {
-            return $this->getQuery()->find($primaryKeys);
+            return $this->_appendsResolver->resolve($this->getQuery()->find($primaryKeys));
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
@@ -134,7 +134,7 @@ class RESTful
 
     public function first() {
         try {
-            return $this->getQuery()->first();
+            return $this->_appendsResolver->resolve($this->getQuery()->first());
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
@@ -143,7 +143,7 @@ class RESTful
 
     public function firstOrFail() {
         try {
-            return $this->getQuery()->firstOrFail();
+            return $this->_appendsResolver->resolve($this->getQuery()->firstOrFail());
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
