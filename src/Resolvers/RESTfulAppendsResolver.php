@@ -22,9 +22,11 @@ class RESTfulAppendsResolver implements IRESTfulResolver
                 return $res->setAppends($this->_appends);
             }
 
-            $res->data = $res->each(function ($item, $key) {
-                return $item->setAppends($this->_appends);
-            });
+            if ($res) {
+                $res->data = $res->each(function ($item, $key) {
+                    return $item->setAppends($this->_appends);
+                });
+            }
         }
 
         return $res;
