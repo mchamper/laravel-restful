@@ -7,6 +7,7 @@ use Mchamper\LaravelRestful\Resolvers\RESTfulFieldsResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulWithResolver;
 use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersDefaultResolver;
 use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersAdvanceResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulScopesResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulSearchResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulSortResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulAppendsResolver;
@@ -19,9 +20,10 @@ class RESTful
     private $_withResolver;
     private $_filtersDefaultResolver;
     private $_filtersAdvanceResolver;
+    private $_scopesResolver;
     private $_searchResolver;
     private $_sortResovler;
-    private $_appendsResovler;
+    private $_appendsResolver;
 
     private $_limit;
     private $_offset;
@@ -39,6 +41,7 @@ class RESTful
         $this->_withResolver = new RESTfulWithResolver($params);
         $this->_filtersDefaultResolver = new RESTfulFiltersDefaultResolver($params, $tableName);
         $this->_filtersAdvanceResolver = new RESTfulFiltersAdvanceResolver($params, $tableName);
+        $this->_scopesResolver = new RESTfulScopesResolver($params, $tableName);
         $this->_searchResolver = new RESTfulSearchResolver($params);
         $this->_sortResovler = new RESTfulSortResolver($params);
         $this->_appendsResolver = new RESTfulAppendsResolver($params);
@@ -60,6 +63,7 @@ class RESTful
         $this->_resource = $this->_withResolver->resolveRelation($this->_resource);
         $this->_resource = $this->_filtersDefaultResolver->resolve($this->_resource);
         $this->_resource = $this->_filtersAdvanceResolver->resolve($this->_resource);
+        $this->_resource = $this->_scopesResolver->resolve($this->_resource);
         $this->_resource = $this->_searchResolver->resolve($this->_resource);
         $this->_resource = $this->_sortResovler->resolve($this->_resource);
 

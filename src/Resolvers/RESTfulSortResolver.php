@@ -21,12 +21,23 @@ class RESTfulSortResolver implements IRESTfulResolver
             foreach ($this->_sort as $value) {
                 $sortDirection = 'asc';
 
-                if (starts_with($value, '-')) {
-                    $sortDirection = 'desc';
-                    $value = str_replace('-', '', $value);
+                if (function_exists('starts_with')) {
+                    if (starts_with($value, '-')) {
+                        $sortDirection = 'desc';
+                        $value = str_replace('-', '', $value);
+                    }
+                } else {
+                    if (\Str::startsWith($value, '-')) {
+                        $sortDirection = 'desc';
+                        $value = str_replace('-', '', $value);
+                    }
                 }
 
-                $query = $query->orderBy($value, $sortDirection);
+                if ($value === 'random') {
+                    $query = $query->inRandomOrder();
+                } else {
+                    $query = $query->orderBy($value, $sortDirection);
+                }
             }
 
             return $query;
