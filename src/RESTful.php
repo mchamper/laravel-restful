@@ -5,6 +5,7 @@ namespace Mchamper\LaravelRestful;
 use Illuminate\Database\QueryException;
 use Mchamper\LaravelRestful\Resolvers\RESTfulFieldsResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulWithResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulWithCountResolver;
 use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersDefaultResolver;
 use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersAdvanceResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulScopesResolver;
@@ -28,7 +29,7 @@ class RESTful
     private $_limit;
     private $_offset;
 
-    public function __construct($resource, Array $params, $tableName = null) {
+    public function __construct($resource, array $params, $tableName = null) {
         $this->_resource = $resource;
 
         if (!$tableName) {
@@ -39,6 +40,7 @@ class RESTful
 
         $this->_fieldsResolver = new RESTfulFieldsResolver($params, $tableName);
         $this->_withResolver = new RESTfulWithResolver($params);
+        $this->_withCountResolver = new RESTfulWithCountResolver($params);
         $this->_filtersDefaultResolver = new RESTfulFiltersDefaultResolver($params, $tableName);
         $this->_filtersAdvanceResolver = new RESTfulFiltersAdvanceResolver($params, $tableName);
         $this->_scopesResolver = new RESTfulScopesResolver($params, $tableName);
@@ -61,6 +63,8 @@ class RESTful
         $this->_resource = $this->_fieldsResolver->resolve($this->_resource);
         $this->_resource = $this->_withResolver->resolve($this->_resource);
         $this->_resource = $this->_withResolver->resolveRelation($this->_resource);
+        $this->_resource = $this->_withCountResolver->resolve($this->_resource);
+        $this->_resource = $this->_withCountResolver->resolveRelation($this->_resource);
         $this->_resource = $this->_filtersDefaultResolver->resolve($this->_resource);
         $this->_resource = $this->_filtersAdvanceResolver->resolve($this->_resource);
         $this->_resource = $this->_scopesResolver->resolve($this->_resource);
