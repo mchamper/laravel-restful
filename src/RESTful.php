@@ -19,6 +19,7 @@ class RESTful
 
     private $_fieldsResolver;
     private $_withResolver;
+    private $_withCountResolver;
     private $_filtersDefaultResolver;
     private $_filtersAdvanceResolver;
     private $_scopesResolver;
@@ -55,11 +56,7 @@ class RESTful
         if (!empty($params['offset'])) {
             $this->_offset = $params['offset'];
         }
-    }
 
-    /* -------------------- */
-
-    public function getQuery() {
         $this->_resource = $this->_fieldsResolver->resolve($this->_resource);
         $this->_resource = $this->_withResolver->resolve($this->_resource);
         $this->_resource = $this->_withResolver->resolveRelation($this->_resource);
@@ -70,8 +67,16 @@ class RESTful
         $this->_resource = $this->_scopesResolver->resolve($this->_resource);
         $this->_resource = $this->_searchResolver->resolve($this->_resource);
         $this->_resource = $this->_sortResovler->resolve($this->_resource);
+    }
 
+    /* -------------------- */
+
+    public function getQuery(bool $mustClone = false) {
         // dd($this->_resource->toSql());
+
+        if ($mustClone) {
+            return clone $this->_resource;
+        }
 
         return $this->_resource;
     }
@@ -86,18 +91,18 @@ class RESTful
 
     /* -------------------- */
 
-    public function paginate() {
+    public function paginate(bool $mustClone = false) {
         try {
-            return $this->_appendsResolver->resolve($this->getQuery()->paginate($this->_limit));
+            return $this->_appendsResolver->resolve($this->getQuery($mustClone)->paginate($this->_limit));
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function get() {
+    public function get(bool $mustClone = false) {
         try {
-            return $this->_appendsResolver->resolve($this->getQuery()
+            return $this->_appendsResolver->resolve($this->getQuery($mustClone)
                 ->when($this->_limit, function ($query) {
                     return $query->limit($this->_limit);
                 })
@@ -113,63 +118,63 @@ class RESTful
         }
     }
 
-    public function count() {
+    public function count(bool $mustClone = false) {
         try {
-            return $this->getQuery()->count();
+            return $this->getQuery($mustClone)->count();
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function find($primaryKeys) {
+    public function find($primaryKeys, bool $mustClone = false) {
         try {
-            return $this->_appendsResolver->resolve($this->getQuery()->find($primaryKeys));
+            return $this->_appendsResolver->resolve($this->getQuery($mustClone)->find($primaryKeys));
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function findOrFail($primaryKeys) {
+    public function findOrFail($primaryKeys, bool $mustClone = false) {
         try {
-            return $this->_appendsResolver->resolve($this->getQuery()->findOrFail($primaryKeys));
+            return $this->_appendsResolver->resolve($this->getQuery($mustClone)->findOrFail($primaryKeys));
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function first() {
+    public function first(bool $mustClone = false) {
         try {
-            return $this->_appendsResolver->resolve($this->getQuery()->first());
+            return $this->_appendsResolver->resolve($this->getQuery($mustClone)->first());
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function firstOrFail() {
+    public function firstOrFail(bool $mustClone = false) {
         try {
-            return $this->_appendsResolver->resolve($this->getQuery()->firstOrFail());
+            return $this->_appendsResolver->resolve($this->getQuery($mustClone)->firstOrFail());
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function exists() {
+    public function exists(bool $mustClone = false) {
         try {
-            return $this->getQuery()->exists();
+            return $this->getQuery($mustClone)->exists();
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
         }
     }
 
-    public function doesntExist() {
+    public function doesntExist(bool $mustClone = false) {
         try {
-            return $this->getQuery()->doesntExist();
+            return $this->getQuery($mustClone)->doesntExist();
 
         } catch (QueryException $e) {
             $this->_badRequest($e);
