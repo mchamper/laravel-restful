@@ -12,6 +12,7 @@ use Mchamper\LaravelRestful\Resolvers\RESTfulScopesResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulSearchResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulSortResolver;
 use Mchamper\LaravelRestful\Resolvers\RESTfulAppendsResolver;
+use Mchamper\LaravelRestful\Resolvers\RESTfulGroupByResolver;
 
 class RESTful
 {
@@ -25,6 +26,7 @@ class RESTful
     private $_scopesResolver;
     private $_searchResolver;
     private $_sortResovler;
+    private $_groupByResovler;
     private $_appendsResolver;
 
     private $_limit;
@@ -47,6 +49,7 @@ class RESTful
         $this->_scopesResolver = new RESTfulScopesResolver($params, $tableName);
         $this->_searchResolver = new RESTfulSearchResolver($params);
         $this->_sortResovler = new RESTfulSortResolver($params);
+        $this->_groupByResovler = new RESTfulGroupByResolver($params);
         $this->_appendsResolver = new RESTfulAppendsResolver($params);
 
         if (!empty($params['limit'])) {
@@ -67,6 +70,7 @@ class RESTful
         $this->_resource = $this->_scopesResolver->resolve($this->_resource);
         $this->_resource = $this->_searchResolver->resolve($this->_resource);
         $this->_resource = $this->_sortResovler->resolve($this->_resource);
+        $this->_resource = $this->_groupByResovler->resolve($this->_resource);
     }
 
     /* -------------------- */
