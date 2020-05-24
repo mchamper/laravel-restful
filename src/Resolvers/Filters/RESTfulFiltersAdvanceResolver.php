@@ -2,6 +2,7 @@
 
 namespace Mchamper\LaravelRestful\Resolvers\Filters;
 
+use Illuminate\Support\Str;
 use Mchamper\LaravelRestful\Resolvers\Filters\RESTfulFiltersResolver;
 
 class RESTfulFiltersAdvanceResolver extends RESTfulFiltersResolver
@@ -26,8 +27,8 @@ class RESTfulFiltersAdvanceResolver extends RESTfulFiltersResolver
 
     private function _getGroup($query, $filters, $groupName = '') {
         foreach ($filters as $key => $value) {
-            if (starts_with($key, '_')) {
-                $groupMethod = starts_with($key, '_orGroup') ? 'orWhere' : 'where';
+            if (Str::startsWith($key, '_')) {
+                $groupMethod = Str::startsWith($key, '_orGroup') ? 'orWhere' : 'where';
 
                 $query = $query->$groupMethod(function ($query) use ($key, $value) {
                     return $this->_getGroup($query, $value, $key);
@@ -44,11 +45,11 @@ class RESTfulFiltersAdvanceResolver extends RESTfulFiltersResolver
     private function _getFilters($query, $filters, $groupMethod, $groupName = '') {
         $query = $query->$groupMethod(function ($query) use ($filters, $groupName) {
             foreach ($filters as $field => $value) {
-                if (starts_with($field, '_')) {
+                if (Str::startsWith($field, '_')) {
                     continue;
                 }
 
-                $isOr = ends_with($groupName, ':or') ? true : false;
+                $isOr = Str::endsWith($groupName, ':or') ? true : false;
                 $query = $this->_createFilter($query, $field, $value, $isOr);
             }
 

@@ -2,6 +2,7 @@
 
 namespace Mchamper\LaravelRestful\Resolvers;
 
+use Illuminate\Support\Str;
 use Mchamper\LaravelRestful\Resolvers\IRESTfulResolver;
 
 class RESTfulSortResolver implements IRESTfulResolver
@@ -21,16 +22,9 @@ class RESTfulSortResolver implements IRESTfulResolver
             foreach ($this->_sort as $value) {
                 $sortDirection = 'asc';
 
-                if (function_exists('starts_with')) {
-                    if (starts_with($value, '-')) {
-                        $sortDirection = 'desc';
-                        $value = str_replace('-', '', $value);
-                    }
-                } else {
-                    if (\Str::startsWith($value, '-')) {
-                        $sortDirection = 'desc';
-                        $value = str_replace('-', '', $value);
-                    }
+                if (Str::startsWith($value, '-')) {
+                    $sortDirection = 'desc';
+                    $value = str_replace('-', '', $value);
                 }
 
                 if ($value === 'random') {
