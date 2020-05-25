@@ -86,11 +86,13 @@ class RESTful
     }
 
     private function _badRequest($e) {
-        if (config('app.debug')) {
-            throw $e;
-        }
+        throw $e;
 
-        throw new \Exception('Bad request.', 400);
+        // if (config('app.debug')) {
+        //     throw $e;
+        // }
+
+        // throw new \Exception('Bad request.', 400);
     }
 
     /* -------------------- */
